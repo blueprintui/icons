@@ -1,0 +1,92 @@
+{
+  "name": "@blueprintui/icons",
+  "version": "0.0.9",
+  "main": "./index.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "type": "module",
+  "customElements": "./custom-elements.json",
+  "homepage": "https://icons.blueprintui.dev",
+  "keywords": [
+    "web components",
+    "blueprintui"
+  ],
+  "license": "MIT",
+  "description": "icons web component library",
+  "scripts": {
+    "ci": "npm-run-all -s clean build test",
+    "start": "npm-run-all clean build -p build:watch drafter:watch",
+    "docs": "cd docs && lite-server",
+    "build": "npm run build:svg && bp build",
+    "build:svg": "node ./svgs.js",
+    "build:watch": "bp build --watch",
+    "drafter": "drafter build",
+    "drafter:watch": "drafter build --watch",
+    "test": "npm-run-all test:unit test:performance test:api",
+    "test:watch": "wtr --watch",
+    "test:unit": "del ./dist/coverage && wtr",
+    "test:coverage": "del ./dist/coverage && wtr --coverage",
+    "test:a11y": "wtr --config ./web-test-runner.a11y.mjs",
+    "test:performance": "wtr --config ./web-test-runner.performance.mjs",
+    "test:api": "filessert ./dist/lib/custom-elements.json ./custom-elements.json",
+    "api:update": "npm run build && cpy ./dist/lib/custom-elements.json ./",
+    "clean": "del ./dist",
+    "publish": "cd ./dist/lib && npm publish --access public",
+    "postinstall": "npm link ../cli ../drafter ../components/dist/lib ../tokens/dist/lib ../themes/dist/lib ../layout/dist/lib"
+  },
+  "files": [
+    "*"
+  ],
+  "sideEffects": [
+    "./include.js",
+    "./shapes/*.js",
+    "./internals/icon.service.js"
+  ],
+  "exports": {
+    "./custom-elements.json": "./custom-elements.json",
+    "./shapes/*": "./shapes/*",
+    "./include": "./include.js",
+    "./include.js": "./include.js",
+    "./internals": "./internals/index.js",
+    "./internals/index.js": "./internals/index.js",
+    ".": "./index.js",
+    "./*": "./*/index.js"
+  },
+  "author": {
+    "name": "Crylan Software"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://cli.blueprintui.dev"
+  },
+  "dependencies": {
+    "lit": "^2.2.5"
+  },
+  "optionalDependencies": {
+    "@blueprintui/tokens": "^0.0.3"
+  },
+  "devDependencies": {
+    "@blueprintui/cli": "^0.0.7",
+    "@blueprintui/components": "^0.0.5",
+    "@blueprintui/drafter": "^0.0.2",
+    "@blueprintui/layout": "^0.0.2",
+    "@blueprintui/themes": "^0.0.3",
+    "@custom-elements-manifest/analyzer": "^0.6.3",
+    "@types/jasmine": "^4.0.3",
+    "@web/dev-server": "0.1.31",
+    "@web/dev-server-esbuild": "0.3.0",
+    "@web/dev-server-import-maps": "0.0.6",
+    "@web/dev-server-rollup": "0.3.17",
+    "@web/test-runner": "0.13.28",
+    "@web/test-runner-commands": "0.6.1",
+    "@web/test-runner-playwright": "0.8.9",
+    "filessert": "^0.0.1",
+    "jasmine": "^4.2.1",
+    "modern-normalize": "^1.1.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.6.4",
+    "web-test-runner-jasmine": "^0.0.1",
+    "web-test-runner-performance": "^0.1.4",
+    "web-test-runner-voiceover": "^0.0.7"
+  }
+}
