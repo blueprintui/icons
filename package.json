@@ -1,9 +1,6 @@
 {
   "name": "@blueprintui/icons",
-  "version": "0.0.9",
-  "main": "./index.js",
-  "module": "./index.js",
-  "typings": "./index.d.ts",
+  "version": "0.0.10",
   "type": "module",
   "customElements": "./custom-elements.json",
   "homepage": "https://icons.blueprintui.dev",
@@ -30,8 +27,10 @@
     "test:performance": "wtr --config ./web-test-runner.performance.mjs",
     "test:api": "filessert ./dist/lib/custom-elements.json ./custom-elements.json",
     "api:update": "npm run build && cpy ./dist/lib/custom-elements.json ./",
+    "sourcemap": "npx source-map-explorer ./**/*.js",
     "clean": "del ./dist",
     "publish": "cd ./dist/lib && npm publish --access public",
+    "deploy": "firebase deploy --only hosting:blueprintui-icons",
     "postinstall": "npm link ../cli ../drafter ../components/dist/lib ../tokens/dist/lib ../themes/dist/lib ../layout/dist/lib"
   },
   "files": [
@@ -60,10 +59,10 @@
     "url": "https://cli.blueprintui.dev"
   },
   "dependencies": {
-    "lit": "^2.2.5"
+    "lit": "^2.2.7"
   },
   "optionalDependencies": {
-    "@blueprintui/tokens": "^0.0.3"
+    "@blueprintui/tokens": "^0.0.5"
   },
   "devDependencies": {
     "@blueprintui/cli": "^0.0.7",
